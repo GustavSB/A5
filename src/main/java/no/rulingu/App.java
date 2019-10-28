@@ -8,6 +8,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        POST post = new POST("datakomm.work", 80);
+        post.sendauhorizationinformation();
     }
 }
