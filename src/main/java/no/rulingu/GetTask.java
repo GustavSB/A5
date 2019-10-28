@@ -8,11 +8,11 @@ import java.net.URL;
 
 public class GetTask {
 
-    public GetTask()
-    {
-        GetTask task = new GetTask("datakomm.work", 80);
-        task.doGet(1);
-    }
+    //public GetTask()
+    //{
+        //GetTask task = new GetTask("datakomm.work", 80);
+        //task.doGet(1);
+   // }
 
     private String BASE_URL; // Base URL (address) of the server
 
@@ -32,7 +32,7 @@ public class GetTask {
     public void doGet(int taskNr) {
         // TODO: change path to something correct
         POST post = new POST("datakomm.work", 80);
-        sendGet("dkrest/gettask" + taskNr + post.SessionID);
+        sendGet("dkrest/gettask/" + taskNr + post.SessionID);
     }
 
     /**
