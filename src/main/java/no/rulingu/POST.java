@@ -107,7 +107,7 @@ public class POST {
         return response.toString();
     }
 
-    private void GetSessionID(String responsB) {
+    public void GetSessionID(String responsB) {
         String[] splitRespons = responsB.split(" ");
         String[] doublesplit = splitRespons[16].split(",");
         SessionID = doublesplit[0];
