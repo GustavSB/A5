@@ -38,7 +38,7 @@ public class POSTExample {
         JSONObject json = new JSONObject();
         json.put("a", a);
         json.put("b", b);
-        json.put("b", b);
+        json.put("c", c);
         System.out.println("Posting this JSON data to server");
         System.out.println(json.toString());
         // TODO: change path to something correct

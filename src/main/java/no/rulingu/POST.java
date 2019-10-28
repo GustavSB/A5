@@ -1,5 +1,6 @@
 package no.rulingu;
 
+import javafx.application.Application;
 import org.json.JSONObject;
 import java.io.*;
 import java.net.HttpURLConnection;
