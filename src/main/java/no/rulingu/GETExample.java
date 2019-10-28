@@ -32,7 +32,7 @@ public class GETExample {
      */
     public void doExampleGet() {
         // TODO: change path to something correct
-        sendGet("dkrest/test/get");
+        sendGet("dkrest/test/get2");
     }
 
     /**
