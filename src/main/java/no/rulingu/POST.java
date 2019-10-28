@@ -73,12 +73,14 @@ public class POST {
                 stream.close();
                 System.out.println("Response from the server:");
                 System.out.println(responseBody);
+                GetSessionID(responseBody);
+
             } else {
                 String responseDescription = con.getResponseMessage();
                 System.out.println("Request failed, response code: " + responseCode + " (" + responseDescription + ")");
             }
         } catch (ProtocolException e) {
-            System.out.println("Protocol nto supported by the server");
+            System.out.println("Protocol not supported by the server");
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
             e.printStackTrace();
@@ -104,4 +106,10 @@ public class POST {
         }
         return response.toString();
     }
-}
+
+    private void GetSessionID(String responsB) {
+        String[] splitRespons = responsB.split(" ");
+        String[] doublesplit = splitRespons[16].split(",");
+        SessionID = doublesplit[0];
+        }
+    }
