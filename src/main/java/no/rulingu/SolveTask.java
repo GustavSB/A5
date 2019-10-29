@@ -1,5 +1,6 @@
 package no.rulingu;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.*;
@@ -11,7 +12,6 @@ import java.net.URL;
 
 public class SolveTask {
 
-    int taskNr = 0;
     String currentSessionID;
     private String BASE_URL; // Base URL (address) of the server
 
@@ -19,16 +19,14 @@ public class SolveTask {
         BASE_URL = "http://" + host + ":" + port + "/";
     }
 
-    public void task(String SessionID) {
-        taskNr++;
+    public void task(String SessionID, String response, int taskNr) {
         currentSessionID = SessionID;
-
 
         if (taskNr == 1) {
             task1();
         }
-        else if (taskNr == 2) {
-            task2();
+        if (taskNr == 2) {
+            task2(response);
         }
     }
 
@@ -38,12 +36,18 @@ public class SolveTask {
         json.put("sessionId", currentSessionID);
         json.put("msg", msg);
         sendPost("dkrest/solve", json);
-
+    }
+//todo fix her  we are getting response from suc task 1 /v2
+    private void task2(String response) {
+        JSONObject json = new JSONObject();
+        json.put("sessionId", currentSessionID);
+        String jsonObjectString = response;
+        JSONObject jObj = new JSONObject(jsonObjectString);
+        JSONArray jsonArray = jObj.getJSONArray("arguments");
+        json.put("msg", jsonArray.toString());
+        sendPost("dkrest/solve", json);
     }
 
-    private void task2() {
-
-    }
     public void sendPost(String path, JSONObject jsonData) {
         try {
             String url = BASE_URL + path;
@@ -65,6 +69,7 @@ public class SolveTask {
 
                 // Response was OK, read the body (data)
                 InputStream stream = con.getInputStream();
+
                 String responseBody = convertStreamToString(stream);
                 stream.close();
                 System.out.println("Response from the server:");
