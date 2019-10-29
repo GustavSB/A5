@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 public class JSONParse {
 
     public static void JSONParse(String respons){
+
         GetTask getTask = new GetTask("datakomm.work" , 80);
         POST post = new POST("datakomm.work", 80);
 

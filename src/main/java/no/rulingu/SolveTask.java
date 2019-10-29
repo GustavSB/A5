@@ -2,15 +2,15 @@ package no.rulingu;
 
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 
+
+
 public class SolveTask {
+
     int taskNr = 0;
     String currentSessionID;
     private String BASE_URL; // Base URL (address) of the server
@@ -23,6 +23,7 @@ public class SolveTask {
         taskNr++;
         currentSessionID = SessionID;
 
+
         if (taskNr == 1) {
             task1();
         }
@@ -32,12 +33,53 @@ public class SolveTask {
     }
 
     private void task1() {
+        JSONObject json = new JSONObject();
         String msg = "Hello";
-        sendGet("dkrest/solve/");
+        json.put("sessionId", currentSessionID);
+        json.put("msg", msg);
+        sendPost("dkrest/solve", json);
+
     }
 
     private void task2() {
 
+    }
+    public void sendPost(String path, JSONObject jsonData) {
+        try {
+            String url = BASE_URL + path;
+            URL urlObj = new URL(url);
+            System.out.println("Sending HTTP POST to " + url);
+            HttpURLConnection con = (HttpURLConnection) urlObj.openConnection();
+
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/json");
+            con.setDoOutput(true);
+
+            OutputStream os = con.getOutputStream();
+            os.write(jsonData.toString().getBytes());
+            os.flush();
+
+            int responseCode = con.getResponseCode();
+            if (responseCode == 200) {
+                System.out.println("Server reached");
+
+                // Response was OK, read the body (data)
+                InputStream stream = con.getInputStream();
+                String responseBody = convertStreamToString(stream);
+                stream.close();
+                System.out.println("Response from the server:");
+                System.out.println(responseBody);
+
+            } else {
+                String responseDescription = con.getResponseMessage();
+                System.out.println("Request failed, response code: " + responseCode + " (" + responseDescription + ")");
+            }
+        } catch (ProtocolException e) {
+            System.out.println("Protocol not supported by the server");
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void sendGet(String path) {
