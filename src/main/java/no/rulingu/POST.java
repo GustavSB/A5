@@ -83,7 +83,7 @@ public class POST {
             System.out.println("Something went wrong: " + e.getMessage());
             e.printStackTrace();
         }
-        task.doGet(1);
+        task.doGet(1, SessionID);
     }
 
     /**

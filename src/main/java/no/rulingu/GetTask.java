@@ -23,13 +23,10 @@ public class GetTask {
     /**
      * Send an HTTP GET to a specific path on the web server
      */
-    public void doGet(int taskNr) {
+    public void doGet(int taskNr, String SessionID) {
         // TODO: change path to something correct
-        POST post = new POST("datakomm.work", 80);
 
-        //Fix so that post is the same object as in App and not a new one!!!!!!
-
-        sendGet("dkrest/gettask/" + taskNr + post.SessionID);
+        sendGet("dkrest/gettask/" + taskNr + "?sessionId=" + SessionID);
     }
 
     /**
