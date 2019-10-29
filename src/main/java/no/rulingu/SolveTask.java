@@ -54,6 +54,14 @@ public class SolveTask {
         sendPost("dkrest/solve", json);
     }
 
+    private void task3() {
+
+    }
+
+    private void task4() {
+
+    }
+
     public void sendPost(String path, JSONObject jsonData) {
         try {
             String url = BASE_URL + path;
