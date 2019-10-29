@@ -87,9 +87,11 @@ public class POST {
     }
 
     private void runTask() {
-        task.doGet(SessionID);
-        SolveTask solveTask = new SolveTask();
-        solveTask.task();
+        for (int i = 1; i <= 4; i++) {
+            task.doGet(SessionID);
+            SolveTask solveTask = new SolveTask("datakomm.work",80);
+            solveTask.task(SessionID);
+        }
     }
 
     /**
