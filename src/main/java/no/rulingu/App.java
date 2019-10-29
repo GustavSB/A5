@@ -21,7 +21,7 @@ public class App
 
     public void go(){
         POST post = new POST("datakomm.work", 80);
-        GetTask getTask = new GetTask("dataKOMM.WORK", 80);
         post.sendauhorizationinformation();
+
     }
 }

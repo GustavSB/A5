@@ -46,7 +46,7 @@ public class POST {
      * @param path     Relative path in the API.
      * @param jsonData The data in JSON format that will be posted to the server
      */
-    private void sendPost(String path, JSONObject jsonData) {
+    public void sendPost(String path, JSONObject jsonData) {
         try {
             String url = BASE_URL + path;
             URL urlObj = new URL(url);

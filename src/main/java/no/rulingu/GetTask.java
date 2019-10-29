@@ -53,6 +53,7 @@ public class GetTask {
                 stream.close();
                 System.out.println("Response from the server:");
                 System.out.println(responseBody);
+                JSONParse.JSONParse(responseBody);
             } else {
                 String responseDescription = con.getResponseMessage();
                 System.out.println("Request failed, response code: " + responseCode + " (" + responseDescription + ")");
