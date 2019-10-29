@@ -54,7 +54,7 @@ public class JSONParseExample {
 
         } catch (JSONException e) {
             // It is important to always wrap JSON parsing in try/catch
-            // If the string is suddently not in the expected format,
+            // If the string is suddenly not in the expected format,
             // an exception will be generated
             System.out.println("Got exception in JSON parsing: " + e.getMessage());
         }

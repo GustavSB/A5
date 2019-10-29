@@ -28,6 +28,12 @@ public class SolveTask {
         if (taskNr == 2) {
             task2(response);
         }
+        else if (taskNr == 3) {
+            task3();
+        }
+        else if (taskNr == 4) {
+            task4();
+        }
     }
 
     private void task1() {
