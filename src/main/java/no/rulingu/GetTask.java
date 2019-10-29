@@ -7,7 +7,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 public class GetTask {
-
+    int taskNr = 0;
     private String BASE_URL; // Base URL (address) of the server
 
     /**
@@ -23,9 +23,10 @@ public class GetTask {
     /**
      * Send an HTTP GET to a specific path on the web server
      */
-    public void doGet(int taskNr, String SessionID) {
+    public void doGet(String SessionID) {
         // TODO: change path to something correct
 
+        taskNr++;
         sendGet("dkrest/gettask/" + taskNr + "?sessionId=" + SessionID);
     }
 

@@ -83,7 +83,13 @@ public class POST {
             System.out.println("Something went wrong: " + e.getMessage());
             e.printStackTrace();
         }
-        task.doGet(1, SessionID);
+        runTask();
+    }
+
+    private void runTask() {
+        task.doGet(SessionID);
+        SolveTask solveTask = new SolveTask();
+        solveTask.task();
     }
 
     /**
