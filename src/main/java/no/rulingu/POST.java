@@ -25,7 +25,7 @@ public class POST {
     /**
      * Post three random numbers to a specific path on the web server
      */
-    public void sendauhorizationinformation() {
+    public String sendauhorizationinformation() {
         // TODO: Change email and phone before sending in;
         String email = "rubenaak@stud.ntnu.no";
         String phone = "97981986";
@@ -36,6 +36,7 @@ public class POST {
         System.out.println("Posting this JSON data to server");
         System.out.println(json.toString());
         sendPost("dkrest/auth", json);
+        return SessionID;
     }
 
     /**

@@ -14,6 +14,7 @@ public class SolveTask {
 
     String currentSessionID;
     private String BASE_URL; // Base URL (address) of the server
+    GetTask taskGetter = new GetTask("datakomm.work", 80);
 
     public SolveTask(String host, int port) {
         BASE_URL = "http://" + host + ":" + port + "/";
@@ -22,32 +23,22 @@ public class SolveTask {
     public void task(String SessionID, String response, int taskNr) {
         currentSessionID = SessionID;
 
-        if (taskNr == 1) {
-            task1();
-        }
-        if (taskNr == 2) {
-            task2(response);
-        }
-        else if (taskNr == 3) {
-            task3();
-        }
-        else if (taskNr == 4) {
-            task4();
-        }
     }
 
-    private void task1() {
+    public void task1(String SessId) {
+        taskGetter.doGet(SessId, 1);
         JSONObject json = new JSONObject();
         String msg = "Hello";
-        json.put("sessionId", currentSessionID);
+        json.put("sessionId", SessId);
         json.put("msg", msg);
         sendPost("dkrest/solve", json);
     }
 //todo fix her  we are getting response from suc task 1 /v2
-    private void task2(String response) {
+    public void task2(String SessId) {
+        taskGetter.doGet(SessId, 2);
         JSONObject json = new JSONObject();
-        json.put("sessionId", currentSessionID);
-        String jsonObjectString = response;
+        json.put("sessionId", SessId);
+        String jsonObjectString = "";
         JSONObject jObj = new JSONObject(jsonObjectString);
         JSONArray jsonArray = jObj.getJSONArray("arguments");
         json.put("msg", jsonArray.toString());

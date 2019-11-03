@@ -22,13 +22,17 @@ public class UserInterface
 
     public void bootMenu() {
         boolean quit = false;
+        SolveTask solver = new SolveTask("datakomm.work", 80);
+        String ID = "";
         while(!quit){
             try{
                 int menuSelection = this.showMenu();
                 switch(menuSelection){
                     case 1:
+                        solver.task1(ID);
                         break;
                     case 2:
+                        solver.task2(ID);
                         break;
                     case 3:
                         break;
@@ -36,7 +40,7 @@ public class UserInterface
                         break;
                     case 5:
                         POST auth = new POST("datakomm.work", 80);
-                        auth.sendauhorizationinformation();
+                        ID = auth.sendauhorizationinformation();
                         break;
                     case 6:
                         System.out.println("YEET");
