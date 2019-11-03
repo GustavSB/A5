@@ -1,5 +1,6 @@
 package no.rulingu;
-import jdk.nashorn.internal.parser.JSONParser;
+
+import org.json.*;
 import org.json.*;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,7 +16,7 @@ public class JSONParse {
 
     public static void JSONParse(String respons){
 
-        GetTask getTask = new GetTask("datakomm.work" , 80);
+        GetTask getTask = new GetTask("datakomm.work" , 80, 1);
         POST post = new POST("datakomm.work", 80);
 
        String jsonObjectString = respons;

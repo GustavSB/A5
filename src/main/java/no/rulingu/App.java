@@ -15,13 +15,8 @@ public class App
 {
     public static void main( String[] args )
     {
-        App app = new App ();
-        app.go();
-    }
-
-    public void go(){
-        POST post = new POST("datakomm.work", 80);
-        post.sendauhorizationinformation();
-
+        System.out.println("started");
+        UserInterface ui = new UserInterface();
+        ui.bootMenu();
     }
 }

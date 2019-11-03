@@ -16,7 +16,7 @@ public class GetTask {
      * @param host Will send request to this host: IP address or domain
      * @param port Will use this port
      */
-    public GetTask(String host, int port) {
+    public GetTask(String host, int port, int taskNr) {
         BASE_URL = "http://" + host + ":" + port + "/";
     }
 
@@ -26,7 +26,7 @@ public class GetTask {
     public void doGet(String SessionID) {
         // TODO: change path to something correct
 
-        taskNr++;
+
         sendGet("dkrest/gettask/" + taskNr + "?sessionId=" + SessionID);
     }
 

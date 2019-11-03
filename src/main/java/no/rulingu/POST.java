@@ -1,6 +1,5 @@
 package no.rulingu;
 
-import javafx.application.Application;
 import org.json.JSONObject;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -21,7 +20,6 @@ public class POST {
      */
     public POST(String host, int port) {
         BASE_URL = "http://" + host + ":" + port + "/";
-        task = new GetTask("datakomm.work", 80);
     }
 
     /**
@@ -29,8 +27,8 @@ public class POST {
      */
     public void sendauhorizationinformation() {
         // TODO: Change email and phone before sending in;
-        String email = "gustavsb@stud.ntnu.no";
-        String phone = "90050394";
+        String email = "rubenaak@stud.ntnu.no";
+        String phone = "97981986";
 
         JSONObject json = new JSONObject();
         json.put("email", email);
@@ -72,7 +70,6 @@ public class POST {
                 System.out.println("Response from the server:");
                 System.out.println(responseBody);
                 GetSessionID(responseBody);
-                runTask(responseBody);
             } else {
                 String responseDescription = con.getResponseMessage();
                 System.out.println("Request failed, response code: " + responseCode + " (" + responseDescription + ")");
@@ -82,14 +79,6 @@ public class POST {
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
             e.printStackTrace();
-        }
-    }
-//TODO fix her /v1
-    private void runTask(String response) {
-        for (int i = 1; i <= 4; i++) {
-            task.doGet(SessionID);
-            SolveTask solveTask = new SolveTask("datakomm.work",80);
-            solveTask.task(SessionID, response, i);
         }
     }
 
