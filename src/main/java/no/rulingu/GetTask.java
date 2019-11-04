@@ -26,6 +26,12 @@ public class GetTask {
         sendGet("dkrest/gettask/" + taskNr + "?sessionId=" + SessionID);
     }
 
+    public String doGetArgs(String SessionID, int taskNr) {
+        String args = "";
+        sendGet("dkrest/gettask/" + taskNr + "?sessionId=" + SessionID);
+        return args;
+    }
+
     /**
      * Send HTTP GET
      *
