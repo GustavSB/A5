@@ -8,6 +8,9 @@ import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 
 public class SolveTask {
@@ -27,11 +30,9 @@ public class SolveTask {
         }
         if (taskNr == 2) {
             task2(response);
-        }
-        else if (taskNr == 3) {
-            task3();
-        }
-        else if (taskNr == 4) {
+        } else if (taskNr == 3) {
+            task3(response);
+        } else if (taskNr == 4) {
             task4();
         }
     }
@@ -43,22 +44,66 @@ public class SolveTask {
         json.put("msg", msg);
         sendPost("dkrest/solve", json);
     }
-//todo fix her  we are getting response from suc task 1 /v2
+
+    //todo fix her  we are getting response from suc task 1 /v2
     private void task2(String response) {
         JSONObject json = new JSONObject();
         json.put("sessionId", currentSessionID);
         String jsonObjectString = response;
+        System.out.println(jsonObjectString);
         JSONObject jObj = new JSONObject(jsonObjectString);
-        JSONArray jsonArray = jObj.getJSONArray("arguments");
-        json.put("msg", jsonArray.toString());
+        //JSONArray jsonArray = jObj.getJSONArray("arguments");
+        //json.put("msg", jsonArray.toString());
         sendPost("dkrest/solve", json);
     }
 
-    private void task3() {
-
+    private void task3(String response) {
+        JSONObject json = new JSONObject();
+        json.put("sessionId", currentSessionID);
+        String jsonObjectString = response;
+        JSONObject jObj = new JSONObject(jsonObjectString);
+        System.out.println(jObj.toString());
+        //JSONArray jsonArray = jObj.getJSONArray("arguments");
+        int result = 0;
+        //for (int i = 0; i <= jsonArray.length(); i++) {
+        //    result = result * i;
+        //}
+        json.put("result", result);
+        sendPost("dkrest/solve", json);
     }
 
     private void task4() {
+        String password = "123456";
+
+        /*boolean state = false;
+        if (!state) {
+            for (int i = 0; i < 9; i++) {
+                String answear = ("000" + i);
+                if (answear == expected) {
+                    state = true;
+                }
+            }
+        }
+        for (int i=0; false; i++) {
+            if (sb == argument) {
+
+            }
+        }*/
+
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("MD5");
+        }
+        catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        byte[] hashInBytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
+
+        StringBuilder sb = new StringBuilder();
+        for (byte b : hashInBytes) {
+            sb.append(String.format("%02x", b));
+        }
+        System.out.println(sb.toString());
 
     }
 
@@ -133,6 +178,7 @@ public class SolveTask {
 
     /**
      * Read the whole content from an InputStream, return it as a string
+     *
      * @param is Inputstream to read the body from
      * @return The whole body as a string
      */
