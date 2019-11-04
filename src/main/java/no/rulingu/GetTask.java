@@ -23,11 +23,10 @@ public class GetTask {
     /**
      * Send an HTTP GET to a specific path on the web server
      */
-    public void doGet(String SessionID) {
+    public void doGet(String SessionID, int i) {
         // TODO: change path to something correct
 
-        taskNr++;
-        sendGet("dkrest/gettask/" + taskNr + "?sessionId=" + SessionID);
+        sendGet("dkrest/gettask/" + i + "?sessionId=" + SessionID);
     }
 
     /**

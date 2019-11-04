@@ -16,9 +16,6 @@ public class JSONParse {
 
     public static void JSONParse(String respons) {
 
-        GetTask getTask = new GetTask("datakomm.work", 80);
-        POST post = new POST("datakomm.work", 80);
-
         String jsonObjectString = respons;
 
         System.out.println(respons);
@@ -41,15 +38,13 @@ public class JSONParse {
                 System.out.println("The object contains field 'arguments' with value "
                         + jsonArray.toString());
             }
-
-
-        } catch (JSONException e) {
+        }
+        catch (JSONException e) {
             // It is important to always wrap JSON parsing in try/catch
             // If the string is suddenly not in the expected format,
             // an exception will be generated
             System.out.println("Got exception in JSON parsing: " + e.getMessage());
         }
-
         System.out.println("");
     }
 }

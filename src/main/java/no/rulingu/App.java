@@ -28,12 +28,13 @@ public class App
 
         GetTask getTask = new GetTask("datakomm.work", 80);
 
-
         SolveTask solveTask = new SolveTask("datakomm.work", 80);
         for (int i = 1; i <= 4; i++) {
-            getTask.doGet(post.SessionID);
+            getTask.doGet(post.SessionID, i);
+            String taskNr = String.valueOf(i);
 
             JSONParse jsonParse = new JSONParse();
+            JSONParse.JSONParse(taskNr);
             solveTask.task(post.SessionID, jsonParse, i);
         }
     }

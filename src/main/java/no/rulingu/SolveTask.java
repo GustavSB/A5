@@ -50,16 +50,13 @@ public class SolveTask {
         JSONObject json = new JSONObject();
         json.put("sessionId", currentSessionID);
 
-
-
-
         System.out.println(response);
 
         JSONObject jObj = new JSONObject(response);
         System.out.println(jObj.toString());
 
-        JSONArray jsonArray = jObj.getJSONArray("arguments");
-        json.put("msg", jsonArray.toString());
+        //JSONArray jsonArray = jObj.getJSONArray("arguments");
+        //json.put("msg", jsonArray.toString());
         sendPost("dkrest/solve", json);
     }
 
@@ -67,13 +64,16 @@ public class SolveTask {
         JSONObject json = new JSONObject();
         json.put("sessionId", currentSessionID);
 
+        System.out.println(response);
+
         JSONObject jObj = new JSONObject(response);
         System.out.println(jObj.toString());
-        //JSONArray jsonArray = jObj.getJSONArray("arguments");
+
+        JSONArray jsonArray = jObj.getJSONArray("arguments");
         int result = 0;
-        //for (int i = 0; i <= jsonArray.length(); i++) {
-        //    result = result * i;
-        //}
+        for (int i = 0; i <= jsonArray.length(); i++) {
+            result = result * i;
+        }
         json.put("result", result);
         sendPost("dkrest/solve", json);
     }

@@ -8,7 +8,6 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 public class POST {
-    GetTask task;
 
     private String BASE_URL; // Base URL (address) of the server
     public String SessionID; //ID that is used when confirming tasks
@@ -21,7 +20,6 @@ public class POST {
      */
     public POST(String host, int port) {
         BASE_URL = "http://" + host + ":" + port + "/";
-        task = new GetTask("datakomm.work", 80);
     }
 
     /**
@@ -82,14 +80,6 @@ public class POST {
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
             e.printStackTrace();
-        }
-    }
-//TODO fix her /v1
-    private void runTask(String response) {
-        for (int i = 1; i <= 4; i++) {
-            task.doGet(SessionID);
-            SolveTask solveTask = new SolveTask("datakomm.work",80);
-            //solveTask.task(SessionID, response, i);
         }
     }
 
