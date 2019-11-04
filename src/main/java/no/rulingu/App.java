@@ -34,7 +34,7 @@ public class App
             String taskNr = String.valueOf(i);
 
             JSONParse jsonParse = new JSONParse();
-            //JSONParse.stringParser();
+            JSONParse.jsonParse(taskNr);
             solveTask.task(post.SessionID, jsonParse, i);
         }
     }
