@@ -10,7 +10,10 @@ import java.net.URL;
 public class POST {
 
     private String BASE_URL; // Base URL (address) of the server
-    public String SessionID; //ID that is used when confirming tasks
+
+
+
+    public static String SessionID; //ID that is used when confirming tasks
 
     /**
      * Create an HTTP POST example

@@ -14,14 +14,14 @@ import java.io.InputStreamReader;
 
 public class JSONParse {
 
-    public static void JSONParse(String respons) {
+    public static JSONObject stringParser(String respons) {
 
         String jsonObjectString = respons;
-
+        JSONObject jsonObject = new JSONObject(jsonObjectString);
         System.out.println(respons);
         // Let's try to parse it as a JSON object
         try {
-            JSONObject jsonObject = new JSONObject(jsonObjectString);
+
             if (jsonObject.has("taskNr")) {
                 int TaskNr = jsonObject.getInt("taskNr");
                 System.out.println("The object contains field 'taskNr' with value "
@@ -32,9 +32,26 @@ public class JSONParse {
                 System.out.println("The object contains field 'description' with value "
                         + description);
             }
-            if (jsonObject.has("arguments")) {
-                JSONObject jObj = new JSONObject(jsonObjectString);
-                JSONArray jsonArray = jObj.getJSONArray("arguments");
+
+        }
+        catch (JSONException e) {
+            // It is important to always wrap JSON parsing in try/catch
+            // If the string is suddenly not in the expected format,
+            // an exception will be generated
+            System.out.println("Got exception in JSON parsing: " + e.getMessage());
+        }
+
+        System.out.println("");
+        return jsonObject;
+    }
+    public static JSONArray arrayParser(String respons){
+
+        String jsonObjectArray = respons;
+        JSONArray jsonArray = new JSONArray(jsonObjectArray);
+        try {
+            if (jsonArray.toString().contains("arguments")) {
+                JSONObject jObj = new JSONObject(jsonObjectArray);
+                jsonArray = jObj.getJSONArray("arguments");
                 System.out.println("The object contains field 'arguments' with value "
                         + jsonArray.toString());
             }
@@ -45,6 +62,9 @@ public class JSONParse {
             // an exception will be generated
             System.out.println("Got exception in JSON parsing: " + e.getMessage());
         }
-        System.out.println("");
+        return jsonArray;
     }
+
+
+
 }

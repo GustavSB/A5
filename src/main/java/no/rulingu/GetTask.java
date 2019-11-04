@@ -29,12 +29,14 @@ public class GetTask {
         sendGet("dkrest/gettask/" + i + "?sessionId=" + SessionID);
     }
 
+
     /**
      * Send HTTP GET
      *
      * @param path     Relative path in the API.
      */
-    private void sendGet(String path) {
+    public void sendGet(String path) {
+
         try {
             String url = BASE_URL + path;
             URL urlObj = new URL(url);
@@ -52,7 +54,8 @@ public class GetTask {
                 stream.close();
                 System.out.println("Response from the server:");
                 System.out.println(responseBody);
-                JSONParse.JSONParse(responseBody);
+                JSONParse.stringParser(responseBody);
+                JSONParse.arrayParser(responseBody);
             } else {
                 String responseDescription = con.getResponseMessage();
                 System.out.println("Request failed, response code: " + responseCode + " (" + responseDescription + ")");
