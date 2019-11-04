@@ -1,5 +1,8 @@
 package no.rulingu;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,5 +26,15 @@ public class App
         POST post = new POST("datakomm.work", 80);
         post.sendauhorizationinformation();
 
+        GetTask getTask = new GetTask("datakomm.work", 80);
+
+
+        SolveTask solveTask = new SolveTask("datakomm.work", 80);
+        for (int i = 1; i <= 4; i++) {
+            getTask.doGet(post.SessionID);
+
+            JSONParse jsonParse = new JSONParse();
+            solveTask.task(post.SessionID, jsonParse, i);
+        }
     }
 }

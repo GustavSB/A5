@@ -22,7 +22,7 @@ public class SolveTask {
         BASE_URL = "http://" + host + ":" + port + "/";
     }
 
-    public void task(String SessionID, String response, int taskNr) {
+    public void task(String SessionID, JSONParse response, int taskNr) {
         currentSessionID = SessionID;
 
         if (taskNr == 1) {
@@ -46,22 +46,28 @@ public class SolveTask {
     }
 
     //todo fix her  we are getting response from suc task 1 /v2
-    private void task2(String response) {
+    private void task2(JSONParse response) {
         JSONObject json = new JSONObject();
         json.put("sessionId", currentSessionID);
-        String jsonObjectString = response;
-        System.out.println(jsonObjectString);
-        JSONObject jObj = new JSONObject(jsonObjectString);
-        //JSONArray jsonArray = jObj.getJSONArray("arguments");
-        //json.put("msg", jsonArray.toString());
+
+
+
+
+        System.out.println(response);
+
+        JSONObject jObj = new JSONObject(response);
+        System.out.println(jObj.toString());
+
+        JSONArray jsonArray = jObj.getJSONArray("arguments");
+        json.put("msg", jsonArray.toString());
         sendPost("dkrest/solve", json);
     }
 
-    private void task3(String response) {
+    private void task3(JSONParse response) {
         JSONObject json = new JSONObject();
         json.put("sessionId", currentSessionID);
-        String jsonObjectString = response;
-        JSONObject jObj = new JSONObject(jsonObjectString);
+
+        JSONObject jObj = new JSONObject(response);
         System.out.println(jObj.toString());
         //JSONArray jsonArray = jObj.getJSONArray("arguments");
         int result = 0;

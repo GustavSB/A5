@@ -72,7 +72,7 @@ public class POST {
                 System.out.println("Response from the server:");
                 System.out.println(responseBody);
                 GetSessionID(responseBody);
-                runTask(responseBody);
+                //runTask(responseBody);
             } else {
                 String responseDescription = con.getResponseMessage();
                 System.out.println("Request failed, response code: " + responseCode + " (" + responseDescription + ")");
@@ -89,7 +89,7 @@ public class POST {
         for (int i = 1; i <= 4; i++) {
             task.doGet(SessionID);
             SolveTask solveTask = new SolveTask("datakomm.work",80);
-            solveTask.task(SessionID, response, i);
+            //solveTask.task(SessionID, response, i);
         }
     }
 
