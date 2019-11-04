@@ -33,9 +33,11 @@ public class SolveTask {
         json.put("msg", msg);
         sendPost("dkrest/solve", json);
     }
-//todo fix her  we are getting response from suc task 1 /v2
+
     public void task2(String SessId) {
-        taskGetter.doGet(SessId, 2);
+        JSONArray array;
+        String[] argsFromJson;
+        argsFromJson = taskGetter.doGetArgs(SessId, 2);
         JSONObject json = new JSONObject();
         json.put("sessionId", SessId);
         String jsonObjectString = "";

@@ -26,9 +26,9 @@ public class GetTask {
         sendGet("dkrest/gettask/" + taskNr + "?sessionId=" + SessionID);
     }
 
-    public String doGetArgs(String SessionID, int taskNr) {
-        String args = "";
-        sendGet("dkrest/gettask/" + taskNr + "?sessionId=" + SessionID);
+    public String[] doGetArgs(String SessionID, int taskNr) {
+        String[] args;
+        args = sendGet2("dkrest/gettask/" + taskNr + "?sessionId=" + SessionID);
         return args;
     }
 
@@ -55,7 +55,8 @@ public class GetTask {
                 stream.close();
                 System.out.println("Response from the server:");
                 System.out.println(responseBody);
-                JSONParse.JSONParse(responseBody);
+                JSONParse parser = new JSONParse();
+                parser.fullparse(responseBody);
             } else {
                 String responseDescription = con.getResponseMessage();
                 System.out.println("Request failed, response code: " + responseCode + " (" + responseDescription + ")");
@@ -66,6 +67,43 @@ public class GetTask {
             System.out.println("Something went wrong: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    private String[] sendGet2 (String path) {
+        String[] arguments;
+        try {
+            String url = BASE_URL + path;
+            URL urlObj = new URL(url);
+            System.out.println("Sending HTTP GET to " + url);
+            HttpURLConnection con = (HttpURLConnection) urlObj.openConnection();
+
+            con.setRequestMethod("GET");
+
+            int responseCode = con.getResponseCode();
+            if (responseCode == 200) {
+                System.out.println("Server reached");
+                // Response was OK, read the body (data)
+                InputStream stream = con.getInputStream();
+                String responseBody = convertStreamToString(stream);
+                stream.close();
+                System.out.println("Response from the server:");
+                System.out.println(responseBody);
+                JSONParse parser = new JSONParse();
+                arguments =  parser.parseArgs(responseBody);
+            } else {
+                String responseDescription = con.getResponseMessage();
+                System.out.println("Request failed, response code: " + responseCode + " (" + responseDescription + ")");
+            }
+        } catch (ProtocolException e) {
+            System.out.println("Protocol not supported by the server");
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+            e.printStackTrace();
+        }
+        if (arguments.length == 0){
+            arguments[0] = "";
+        }
+        return arguments;
     }
 
     /**
