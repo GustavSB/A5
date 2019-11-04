@@ -22,17 +22,19 @@ public class SolveTask {
         BASE_URL = "http://" + host + ":" + port + "/";
     }
 
-    public void task(String SessionID, JSONParse response, int taskNr) {
+    public void task(String SessionID, JSONObject stringParser, JSONArray arrayParser, int taskNr) {
         currentSessionID = SessionID;
 
         if (taskNr == 1) {
             task1();
         }
         if (taskNr == 2) {
-            task2(response);
-        } else if (taskNr == 3) {
-            task3(response);
-        } else if (taskNr == 4) {
+            task2(arrayParser);
+        }
+        else if (taskNr == 3) {
+            task3(arrayParser);
+        }
+        else if (taskNr == 4) {
             task4();
         }
     }
@@ -46,13 +48,13 @@ public class SolveTask {
     }
 
     //todo fix her  we are getting response from suc task 1 /v2
-    private void task2(JSONParse response) {
+    private void task2(JSONArray arrayParser) {
         JSONObject json = new JSONObject();
         json.put("sessionId", currentSessionID);
 
-        System.out.println(response);
+        System.out.println(arrayParser);
 
-        JSONObject jObj = new JSONObject(response);
+        JSONObject jObj = new JSONObject(arrayParser);
         System.out.println(jObj.toString());
 
         //JSONArray jsonArray = jObj.getJSONArray("arguments");
@@ -60,13 +62,13 @@ public class SolveTask {
         sendPost("dkrest/solve", json);
     }
 
-    private void task3(JSONParse response) {
+    private void task3(JSONArray arrayParser) {
         JSONObject json = new JSONObject();
         json.put("sessionId", currentSessionID);
 
-        System.out.println(response);
+        System.out.println(arrayParser);
 
-        JSONObject jObj = new JSONObject(response);
+        JSONObject jObj = new JSONObject(arrayParser);
         System.out.println(jObj.toString());
 
         JSONArray jsonArray = jObj.getJSONArray("arguments");
@@ -110,7 +112,6 @@ public class SolveTask {
             sb.append(String.format("%02x", b));
         }
         System.out.println(sb.toString());
-
     }
 
     public void sendPost(String path, JSONObject jsonData) {
@@ -140,36 +141,6 @@ public class SolveTask {
                 System.out.println("Response from the server:");
                 System.out.println(responseBody);
 
-            } else {
-                String responseDescription = con.getResponseMessage();
-                System.out.println("Request failed, response code: " + responseCode + " (" + responseDescription + ")");
-            }
-        } catch (ProtocolException e) {
-            System.out.println("Protocol not supported by the server");
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    private void sendGet(String path) {
-        try {
-            String url = BASE_URL + path;
-            URL urlObj = new URL(url);
-            System.out.println("Sending HTTP GET to " + url);
-            HttpURLConnection con = (HttpURLConnection) urlObj.openConnection();
-
-            con.setRequestMethod("GET");
-
-            int responseCode = con.getResponseCode();
-            if (responseCode == 200) {
-                System.out.println("Server reached");
-                // Response was OK, read the body (data)
-                InputStream stream = con.getInputStream();
-                String responseBody = convertStreamToString(stream);
-                stream.close();
-                System.out.println("Response from the server:");
-                System.out.println(responseBody);
             } else {
                 String responseDescription = con.getResponseMessage();
                 System.out.println("Request failed, response code: " + responseCode + " (" + responseDescription + ")");

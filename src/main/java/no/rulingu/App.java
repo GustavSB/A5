@@ -31,11 +31,10 @@ public class App
         SolveTask solveTask = new SolveTask("datakomm.work", 80);
         for (int i = 1; i <= 4; i++) {
             getTask.doGet(post.SessionID, i);
-            String taskNr = String.valueOf(i);
 
-            JSONParse jsonParse = new JSONParse();
-            JSONParse.jsonParse(taskNr);
-            solveTask.task(post.SessionID, jsonParse, i);
+            JSONObject stringParser = getTask.stringParser;
+            JSONArray arrayParser = getTask.arrayParser;
+            solveTask.task(post.SessionID, stringParser, arrayParser, i);
         }
     }
 }

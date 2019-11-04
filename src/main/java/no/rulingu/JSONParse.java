@@ -32,7 +32,6 @@ public class JSONParse {
                 System.out.println("The object contains field 'description' with value "
                         + description);
             }
-
         }
         catch (JSONException e) {
             // It is important to always wrap JSON parsing in try/catch

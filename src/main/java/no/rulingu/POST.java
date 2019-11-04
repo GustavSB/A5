@@ -11,8 +11,6 @@ public class POST {
 
     private String BASE_URL; // Base URL (address) of the server
 
-
-
     public static String SessionID; //ID that is used when confirming tasks
 
     /**
@@ -73,7 +71,6 @@ public class POST {
                 System.out.println("Response from the server:");
                 System.out.println(responseBody);
                 GetSessionID(responseBody);
-                //runTask(responseBody);
             } else {
                 String responseDescription = con.getResponseMessage();
                 System.out.println("Request failed, response code: " + responseCode + " (" + responseDescription + ")");

@@ -1,5 +1,6 @@
 package no.rulingu;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -7,8 +8,9 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 public class GetTask {
-    int taskNr = 0;
     private String BASE_URL; // Base URL (address) of the server
+    JSONObject stringParser;
+    JSONArray arrayParser;
 
     /**
      * Create an HTTP GET example
@@ -42,9 +44,7 @@ public class GetTask {
             URL urlObj = new URL(url);
             System.out.println("Sending HTTP GET to " + url);
             HttpURLConnection con = (HttpURLConnection) urlObj.openConnection();
-
             con.setRequestMethod("GET");
-
             int responseCode = con.getResponseCode();
             if (responseCode == 200) {
                 System.out.println("Server reached");
@@ -54,8 +54,8 @@ public class GetTask {
                 stream.close();
                 System.out.println("Response from the server:");
                 System.out.println(responseBody);
-                JSONParse.stringParser(responseBody);
-                JSONParse.arrayParser(responseBody);
+                stringParser = JSONParse.stringParser(responseBody);
+                arrayParser = JSONParse.arrayParser(responseBody);
             } else {
                 String responseDescription = con.getResponseMessage();
                 System.out.println("Request failed, response code: " + responseCode + " (" + responseDescription + ")");
@@ -82,7 +82,8 @@ public class GetTask {
                 response.append(inputLine);
                 response.append('\n');
             }
-        } catch (IOException ex) {
+        }
+        catch (IOException ex) {
             System.out.println("Could not read the data from HTTP response: " + ex.getMessage());
         }
         return response.toString();
