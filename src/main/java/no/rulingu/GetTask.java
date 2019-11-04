@@ -55,8 +55,8 @@ public class GetTask {
                 stream.close();
                 System.out.println("Response from the server:");
                 System.out.println(responseBody);
-                stringParser = JSONParse.stringParser(responseBody);
-                arrayParser = JSONParse.arrayParser(responseBody);
+                JSONParse.stringParser(responseBody);
+                JSONParse.arrayParser(responseBody);
             } else {
                 String responseDescription = con.getResponseMessage();
                 System.out.println("Request failed, response code: " + responseCode + " (" + responseDescription + ")");
@@ -68,6 +68,7 @@ public class GetTask {
             e.printStackTrace();
         }
     }
+
 
     /**
      * Read the whole content from an InputStream, return it as a string
@@ -88,5 +89,13 @@ public class GetTask {
             System.out.println("Could not read the data from HTTP response: " + ex.getMessage());
         }
         return response.toString();
+    }
+
+    public JSONArray getY() {
+        return y;
+    }
+
+    public JSONObject getX() {
+        return x;
     }
 }

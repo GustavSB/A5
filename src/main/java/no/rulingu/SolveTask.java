@@ -29,12 +29,10 @@ public class SolveTask {
             task1();
         }
         if (taskNr == 2) {
-            task2(arrayParser);
-        }
-        else if (taskNr == 3) {
-            task3(arrayParser);
-        }
-        else if (taskNr == 4) {
+            task2(response);
+        } else if (taskNr == 3) {
+            task3(response);
+        } else if (taskNr == 4) {
             task4();
         }
     }

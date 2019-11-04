@@ -41,9 +41,10 @@ public class JSONParse {
     public JSONArray arrayParser(String respons){
 
         String jsonObjectArray = respons;
+        JSONObject jsonObject = new JSONObject(jsonObjectArray);
         JSONArray jsonArray = new JSONArray(jsonObjectArray);
         try {
-            if (jsonArray.toString().contains("arguments")) {
+            if (jsonObject.has("arguments")) {
                 JSONObject jObj = new JSONObject(jsonObjectArray);
                 jsonArray = jObj.getJSONArray("arguments");
                 System.out.println("The object contains field 'arguments' with value "
