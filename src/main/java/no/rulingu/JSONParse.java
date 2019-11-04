@@ -1,20 +1,15 @@
 package no.rulingu;
 
-import jdk.nashorn.internal.parser.JSONParser;
-import org.json.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
 
 public class JSONParse {
 
-    public static JSONObject stringParser(String respons) {
+    public JSONParse(){}
+
+    public JSONObject stringParser(String respons) {
 
         String jsonObjectString = respons;
         JSONObject jsonObject = new JSONObject(jsonObjectString);
@@ -43,7 +38,7 @@ public class JSONParse {
         System.out.println("");
         return jsonObject;
     }
-    public static JSONArray arrayParser(String respons){
+    public JSONArray arrayParser(String respons){
 
         String jsonObjectArray = respons;
         JSONArray jsonArray = new JSONArray(jsonObjectArray);

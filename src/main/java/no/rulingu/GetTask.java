@@ -38,6 +38,7 @@ public class GetTask {
      * @param path     Relative path in the API.
      */
     public void sendGet(String path) {
+        JSONArray jsonArgs;
 
         try {
             String url = BASE_URL + path;
