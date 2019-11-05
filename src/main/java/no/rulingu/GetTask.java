@@ -11,6 +11,7 @@ public class GetTask {
     private String BASE_URL; // Base URL (address) of the server
     JSONObject stringParser;
     JSONArray arrayParser;
+    int i = 0;
 
     /**
      * Create an HTTP GET example
@@ -55,8 +56,13 @@ public class GetTask {
                 stream.close();
                 System.out.println("Response from the server:");
                 System.out.println(responseBody);
-                JSONParse.stringParser(responseBody);
-                JSONParse.arrayParser(responseBody);
+                stringParser = JSONParse.stringParser(responseBody);
+                if (i == 0) {
+                    i ++;
+                }
+                else {
+                    arrayParser = JSONParse.arrayParser(responseBody);
+                }
             } else {
                 String responseDescription = con.getResponseMessage();
                 System.out.println("Request failed, response code: " + responseCode + " (" + responseDescription + ")");
@@ -91,11 +97,11 @@ public class GetTask {
         return response.toString();
     }
 
-    public JSONArray getY() {
+    /*public JSONArray getY() {
         return y;
     }
 
     public JSONObject getX() {
         return x;
-    }
+    }*/
 }

@@ -17,21 +17,22 @@ public class SolveTask {
 
     String currentSessionID;
     private String BASE_URL; // Base URL (address) of the server
+    int result = 1;
 
     public SolveTask(String host, int port) {
         BASE_URL = "http://" + host + ":" + port + "/";
     }
 
-    public void task(String SessionID, JSONObject stringParser, JSONArray arrayParser, int taskNr) {
+    public void task(String SessionID, JSONObject stringParser, JSONArray arguments, int taskNr) {
         currentSessionID = SessionID;
 
         if (taskNr == 1) {
             task1();
         }
         if (taskNr == 2) {
-            task2(response);
+            task2(arguments);
         } else if (taskNr == 3) {
-            task3(response);
+            task3(arguments);
         } else if (taskNr == 4) {
             task4();
         }
@@ -46,35 +47,32 @@ public class SolveTask {
     }
 
     //todo fix her  we are getting response from suc task 1 /v2
-    private void task2(JSONArray arrayParser) {
+    private void task2(JSONArray arguments) {
         JSONObject json = new JSONObject();
         json.put("sessionId", currentSessionID);
 
-        System.out.println(arrayParser);
+        System.out.println(arguments);
+        String msg = arguments.getString(0);
 
-        JSONObject jObj = new JSONObject(arrayParser);
-        System.out.println(jObj.toString());
-
-        //JSONArray jsonArray = jObj.getJSONArray("arguments");
-        //json.put("msg", jsonArray.toString());
+        json.put("msg", msg);
+        System.out.println(json);
         sendPost("dkrest/solve", json);
     }
 
-    private void task3(JSONArray arrayParser) {
+    private void task3(JSONArray arguments) {
         JSONObject json = new JSONObject();
         json.put("sessionId", currentSessionID);
 
-        System.out.println(arrayParser);
+        System.out.println(arguments);
 
-        JSONObject jObj = new JSONObject(arrayParser);
-        System.out.println(jObj.toString());
+        for (int i = 0; i < arguments.length(); i++) {
+            Object arg = arguments.get(i);
+            System.out.println(arg);
 
-        JSONArray jsonArray = jObj.getJSONArray("arguments");
-        int result = 0;
-        for (int i = 0; i <= jsonArray.length(); i++) {
-            result = result * i;
+            result = result * (Integer.valueOf((String) arguments.get(i)));
         }
         json.put("result", result);
+        System.out.println(json);
         sendPost("dkrest/solve", json);
     }
 

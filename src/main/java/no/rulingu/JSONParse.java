@@ -7,16 +7,12 @@ import org.json.JSONObject;
 
 public class JSONParse {
 
-    public JSONParse(){}
-
-    public JSONObject stringParser(String respons) {
+    public static JSONObject stringParser(String respons) {
 
         String jsonObjectString = respons;
         JSONObject jsonObject = new JSONObject(jsonObjectString);
-        System.out.println(respons);
         // Let's try to parse it as a JSON object
         try {
-
             if (jsonObject.has("taskNr")) {
                 int TaskNr = jsonObject.getInt("taskNr");
                 System.out.println("The object contains field 'taskNr' with value "
@@ -34,19 +30,19 @@ public class JSONParse {
             // an exception will be generated
             System.out.println("Got exception in JSON parsing: " + e.getMessage());
         }
-
         System.out.println("");
         return jsonObject;
     }
-    public JSONArray arrayParser(String respons){
+
+    public static JSONArray arrayParser(String respons) {
 
         String jsonObjectArray = respons;
         JSONObject jsonObject = new JSONObject(jsonObjectArray);
-        JSONArray jsonArray = new JSONArray(jsonObjectArray);
+        JSONArray jsonArray = null;
+
         try {
             if (jsonObject.has("arguments")) {
-                JSONObject jObj = new JSONObject(jsonObjectArray);
-                jsonArray = jObj.getJSONArray("arguments");
+                jsonArray = jsonObject.getJSONArray("arguments");
                 System.out.println("The object contains field 'arguments' with value "
                         + jsonArray.toString());
             }
@@ -59,7 +55,6 @@ public class JSONParse {
         }
         return jsonArray;
     }
-
 
 
 }
