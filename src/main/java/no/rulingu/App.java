@@ -27,8 +27,8 @@ public class App
         for (int i = 1; i <= 4; i++) {
             getTask.doGet(post.SessionID, i);
 
-            JSONObject stringParser = getTask.stringParser;
-            JSONArray arrayParser = getTask.arrayParser;
+            JSONObject stringParser = JSONParse.stringParser();
+            JSONArray arrayParser = JSONParse.arrayParser();
             solveTask.task(post.SessionID, stringParser, arrayParser, i);
         }
     }
