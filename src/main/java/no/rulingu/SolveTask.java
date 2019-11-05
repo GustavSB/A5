@@ -35,11 +35,9 @@ public class SolveTask {
             task3(arguments);
         } else if (taskNr == 4) {
             task4(arguments);
-            taskNr = 5;
-        } else if (taskNr == 5) {
+        } else if (taskNr == 2016) {
             task5(arguments);
         }
-
     }
 
     private void task1() {
@@ -113,7 +111,7 @@ public class SolveTask {
     }
 
     private void task5(JSONArray arguments){
-        JSONObject json = new JSONObject();
+        /*JSONObject json = new JSONObject();
         json.put("sessionId", currentSessionID);
 
         System.out.println(arguments);
@@ -127,7 +125,7 @@ public class SolveTask {
 
         json.put("result", ip);
         System.out.println(json);
-        sendPost("dkrest/solve", json);
+        sendPost("dkrest/solve", json);*/
     }
 
     public void sendPost(String path, JSONObject jsonData) {

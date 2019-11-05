@@ -29,8 +29,8 @@ public class POST {
      */
     public void sendauhorizationinformation() {
         // TODO: Change email and phone before sending in;
-        String email = "gustavsb@stud.ntnu.no";
-        String phone = "90050394";
+        String email = "lindahsp@stud.ntnu.no";
+        String phone = "47908870";
 
         JSONObject json = new JSONObject();
         json.put("email", email);
