@@ -20,8 +20,8 @@ public class App {
         GetTask getTask = new GetTask("datakomm.work", 80);
 
         SolveTask solveTask = new SolveTask("datakomm.work", 80);
-        for (int i = 1; i <= 5; i++) {
-            if (i == 5) {
+        for (int i = 1; i <= 2017; i++) {
+            if (i == 6) {
                 i = 2016;
             }
             String parseString = getTask.doGet(post.SessionID, i);

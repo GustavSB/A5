@@ -28,12 +28,9 @@ public class GetTask {
      * Send an HTTP GET to a specific path on the web server
      */
     public String doGet(String SessionID, int i) {
-        // TODO: change path to something correct
-
         String response = sendGet("dkrest/gettask/" + i + "?sessionId=" + SessionID);
         return response;
     }
-
 
     /**
      * Send HTTP GET
@@ -78,7 +75,6 @@ public class GetTask {
         return responseBody;
     }
 
-
     /**
      * Read the whole content from an InputStream, return it as a string
      *
@@ -99,12 +95,4 @@ public class GetTask {
         }
         return response.toString();
     }
-
-    /*public JSONArray getY() {
-        return y;
-    }
-
-    public JSONObject getX() {
-        return x;
-    }*/
 }

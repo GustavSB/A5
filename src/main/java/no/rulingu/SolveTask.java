@@ -37,6 +37,8 @@ public class SolveTask {
             task4(arguments);
         } else if (taskNr == 2016) {
             task5(arguments);
+        } else if (taskNr == 2017) {
+            taskFeedback();
         }
     }
 
@@ -48,7 +50,6 @@ public class SolveTask {
         sendPost("dkrest/solve", json);
     }
 
-    //todo fix her  we are getting response from suc task 1 /v2
     private void task2(JSONArray arguments) {
         JSONObject json = new JSONObject();
         json.put("sessionId", currentSessionID);
@@ -126,6 +127,14 @@ public class SolveTask {
         json.put("result", ip);
         System.out.println(json);
         sendPost("dkrest/solve", json);*/
+    }
+
+    private void taskFeedback() {
+        JSONObject json = new JSONObject();
+        json.put("sessionId", currentSessionID);
+        GetTask getTask = new GetTask("datakomm.work", 80);
+        System.out.println(json);
+        getTask.sendGet("dkrest/results/" + currentSessionID);
     }
 
     public void sendPost(String path, JSONObject jsonData) {
