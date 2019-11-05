@@ -2,6 +2,7 @@ package no.rulingu;
 
 import javafx.application.Application;
 import org.json.JSONObject;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
@@ -85,6 +86,7 @@ public class POST {
 
     /**
      * Read the whole content from an InputStream, return it as a string
+     *
      * @param is Inputstream to read the body from
      * @return The whole body as a string
      */
@@ -107,5 +109,5 @@ public class POST {
         String[] splitRespons = responsB.split(" ");
         String[] doublesplit = splitRespons[16].split(",");
         SessionID = doublesplit[0];
-        }
     }
+}
