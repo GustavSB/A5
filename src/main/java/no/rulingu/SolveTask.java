@@ -79,110 +79,35 @@ public class SolveTask {
     private void task4(JSONArray arguments) {
         String password = "";
         boolean value = false;
-
-        while (value == false) {
-
-            for (int i = 0; i < 10000; i++) {
-                if (i < 10) {
-                    password = "000" + i;
-                    MessageDigest md = null;
-                    try {
-                        md = MessageDigest.getInstance("MD5");
-                    } catch (NoSuchAlgorithmException e) {
-                        e.printStackTrace();
-                    }
-                    byte[] hashInBytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
-
-                    StringBuilder sb = new StringBuilder();
-                    for (byte b : hashInBytes) {
-                        sb.append(String.format("%02x", b));
-                    }
-                    if (arguments.toString().contains(sb.toString())) {
-                        value = true;
-                        System.out.println(sb);
-
-                        JSONObject json = new JSONObject();
-                        json.put("sessionId", currentSessionID);
-                        json.put("pin", password);
-                        System.out.println(json);
-                        sendPost("dkrest/solve", json);
-                    }
-                } else if (i < 100) {
-                    password = "00" + i;
-                    MessageDigest md = null;
-                    try {
-                        md = MessageDigest.getInstance("MD5");
-                    } catch (NoSuchAlgorithmException e) {
-                        e.printStackTrace();
-                    }
-                    byte[] hashInBytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
-
-                    StringBuilder sb = new StringBuilder();
-                    for (byte b : hashInBytes) {
-                        sb.append(String.format("%02x", b));
-                    }
-                    if (arguments.toString().contains(sb.toString())) {
-                        value = true;
-                        System.out.println(sb);
-
-                        JSONObject json = new JSONObject();
-                        json.put("sessionId", currentSessionID);
-                        json.put("pin", password);
-                        System.out.println(json);
-                        sendPost("dkrest/solve", json);
-                    }
-                } else if (i < 1000) {
-                    password = "0" + i;
-                    MessageDigest md = null;
-                    try {
-                        md = MessageDigest.getInstance("MD5");
-                    } catch (NoSuchAlgorithmException e) {
-                        e.printStackTrace();
-                    }
-                    byte[] hashInBytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
-
-                    StringBuilder sb = new StringBuilder();
-                    for (byte b : hashInBytes) {
-                        sb.append(String.format("%02x", b));
-                    }
-                    if (arguments.toString().contains(sb.toString())) {
-                        value = true;
-                        System.out.println(sb);
-
-                        JSONObject json = new JSONObject();
-                        json.put("sessionId", currentSessionID);
-                        json.put("pin", password);
-                        System.out.println(json);
-                        sendPost("dkrest/solve", json);
-                    }
-                } else if (i < 10000) {
-                    password = "" + i;
-                    MessageDigest md = null;
-                    try {
-                        md = MessageDigest.getInstance("MD5");
-                    } catch (NoSuchAlgorithmException e) {
-                        e.printStackTrace();
-                    }
-                    byte[] hashInBytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
-
-                    StringBuilder sb = new StringBuilder();
-                    for (byte b : hashInBytes) {
-                        sb.append(String.format("%02x", b));
-                    }
-                    if (arguments.toString().contains(sb.toString())) {
-                        value = true;
-                        System.out.println(sb);
-
-                        JSONObject json = new JSONObject();
-                        json.put("sessionId", currentSessionID);
-                        json.put("pin", password);
-                        System.out.println(json);
-                        sendPost("dkrest/solve", json);
-                    }
-                }
+        int i = 0;
+        while (!value && i < 10000) {
+            password = String.format("%04d", i);
+            MessageDigest md = null;
+            try {
+                md = MessageDigest.getInstance("MD5");
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
             }
+            byte[] hashInBytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
+
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashInBytes) {
+                sb.append(String.format("%02x", b));
+            }
+            if (arguments.toString().contains(sb.toString())) {
+                value = true;
+                System.out.println(sb);
+
+                JSONObject json = new JSONObject();
+                json.put("sessionId", currentSessionID);
+                json.put("pin", password);
+                System.out.println(json);
+                sendPost("dkrest/solve", json);
+            }
+            i++;
         }
     }
+
 
     public void sendPost(String path, JSONObject jsonData) {
         try {
