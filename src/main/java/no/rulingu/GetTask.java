@@ -61,9 +61,8 @@ public class GetTask {
                 System.out.println(responseBody);
                 stringParser = JSONParse.stringParser(responseBody);
                 if (i == 0) {
-                    i ++;
-                }
-                else {
+                    i++;
+                } else {
                     arrayParser = JSONParse.arrayParser(responseBody);
                 }
             } else {
