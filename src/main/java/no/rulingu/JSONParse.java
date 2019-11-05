@@ -23,8 +23,7 @@ public class JSONParse {
                 System.out.println("The object contains field 'description' with value "
                         + description);
             }
-        }
-        catch (JSONException e) {
+        } catch (JSONException e) {
             // It is important to always wrap JSON parsing in try/catch
             // If the string is suddenly not in the expected format,
             // an exception will be generated
@@ -46,8 +45,7 @@ public class JSONParse {
                 System.out.println("The object contains field 'arguments' with value "
                         + jsonArray.toString());
             }
-        }
-        catch (JSONException e) {
+        } catch (JSONException e) {
             // It is important to always wrap JSON parsing in try/catch
             // If the string is suddenly not in the expected format,
             // an exception will be generated

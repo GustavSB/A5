@@ -97,8 +97,7 @@ public class SolveTask {
         MessageDigest md = null;
         try {
             md = MessageDigest.getInstance("MD5");
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
         byte[] hashInBytes = md.digest(password.getBytes(StandardCharsets.UTF_8));

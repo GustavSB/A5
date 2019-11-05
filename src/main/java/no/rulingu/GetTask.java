@@ -2,6 +2,7 @@ package no.rulingu;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
@@ -26,20 +27,22 @@ public class GetTask {
     /**
      * Send an HTTP GET to a specific path on the web server
      */
-    public void doGet(String SessionID, int i) {
+    public String doGet(String SessionID, int i) {
         // TODO: change path to something correct
 
-        sendGet("dkrest/gettask/" + i + "?sessionId=" + SessionID);
+        String response = sendGet("dkrest/gettask/" + i + "?sessionId=" + SessionID);
+        return response;
     }
 
 
     /**
      * Send HTTP GET
      *
-     * @param path     Relative path in the API.
+     * @param path Relative path in the API.
      */
-    public void sendGet(String path) {
-        //JSONArray jsonArgs;
+    public String sendGet(String path) {
+        JSONArray jsonArgs;
+        String responseBody = "";
 
         try {
             String url = BASE_URL + path;
@@ -52,7 +55,7 @@ public class GetTask {
                 System.out.println("Server reached");
                 // Response was OK, read the body (data)
                 InputStream stream = con.getInputStream();
-                String responseBody = convertStreamToString(stream);
+                responseBody = convertStreamToString(stream);
                 stream.close();
                 System.out.println("Response from the server:");
                 System.out.println(responseBody);
@@ -73,11 +76,13 @@ public class GetTask {
             System.out.println("Something went wrong: " + e.getMessage());
             e.printStackTrace();
         }
+        return responseBody;
     }
 
 
     /**
      * Read the whole content from an InputStream, return it as a string
+     *
      * @param is Inputstream to read the body from
      * @return The whole body as a string
      */
@@ -90,8 +95,7 @@ public class GetTask {
                 response.append(inputLine);
                 response.append('\n');
             }
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             System.out.println("Could not read the data from HTTP response: " + ex.getMessage());
         }
         return response.toString();
