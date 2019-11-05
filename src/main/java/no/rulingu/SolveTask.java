@@ -22,16 +22,16 @@ public class SolveTask {
         BASE_URL = "http://" + host + ":" + port + "/";
     }
 
-    public void task(String SessionID, JSONObject stringParser, JSONArray arrayParser, int taskNr) {
+    public void task(String SessionID, JSONObject jObj, JSONArray jArray, int taskNr) {
         currentSessionID = SessionID;
 
         if (taskNr == 1) {
             task1();
         }
         if (taskNr == 2) {
-            task2(response);
+            task2(jArray);
         } else if (taskNr == 3) {
-            task3(response);
+            task3(jArray);
         } else if (taskNr == 4) {
             task4();
         }
@@ -46,17 +46,13 @@ public class SolveTask {
     }
 
     //todo fix her  we are getting response from suc task 1 /v2
-    private void task2(JSONArray arrayParser) {
+    private void task2(JSONArray jArray) {
         JSONObject json = new JSONObject();
         json.put("sessionId", currentSessionID);
-
-        System.out.println(arrayParser);
-
-        JSONObject jObj = new JSONObject(arrayParser);
-        System.out.println(jObj.toString());
-
+        System.out.println(jArray.toString());
+        //JSONObject jObj = new JSONObject(JArray);
         //JSONArray jsonArray = jObj.getJSONArray("arguments");
-        //json.put("msg", jsonArray.toString());
+        json.put("msg", jArray);
         sendPost("dkrest/solve", json);
     }
 

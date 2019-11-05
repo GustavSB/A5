@@ -90,12 +90,4 @@ public class GetTask {
         }
         return response.toString();
     }
-
-    public JSONArray getY() {
-        return y;
-    }
-
-    public JSONObject getX() {
-        return x;
-    }
 }

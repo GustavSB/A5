@@ -9,7 +9,7 @@ public class JSONParse {
 
     public JSONParse(){}
 
-    public JSONObject stringParser(String respons) {
+    public static JSONObject stringParser(String respons) {
 
         String jsonObjectString = respons;
         JSONObject jsonObject = new JSONObject(jsonObjectString);
@@ -38,15 +38,14 @@ public class JSONParse {
         System.out.println("");
         return jsonObject;
     }
-    public JSONArray arrayParser(String respons){
+    public static JSONArray arrayParser(String respons){
 
-        String jsonObjectArray = respons;
-        JSONObject jsonObject = new JSONObject(jsonObjectArray);
-        JSONArray jsonArray = new JSONArray(jsonObjectArray);
+        String jsonString = respons;
+        JSONObject jsonObject = new JSONObject(jsonString);
+        JSONArray jsonArray = new JSONArray();
         try {
             if (jsonObject.has("arguments")) {
-                JSONObject jObj = new JSONObject(jsonObjectArray);
-                jsonArray = jObj.getJSONArray("arguments");
+                jsonArray = jsonObject.getJSONArray("arguments");
                 System.out.println("The object contains field 'arguments' with value "
                         + jsonArray.toString());
             }

@@ -70,7 +70,7 @@ public class POST {
                 stream.close();
                 System.out.println("Response from the server:");
                 System.out.println(responseBody);
-                GetSessionID(responseBody);
+                TransformSessionID(responseBody);
             } else {
                 String responseDescription = con.getResponseMessage();
                 System.out.println("Request failed, response code: " + responseCode + " (" + responseDescription + ")");
@@ -103,7 +103,7 @@ public class POST {
         return response.toString();
     }
 
-    public void GetSessionID(String responsB) {
+    public void TransformSessionID(String responsB) {
         String[] splitRespons = responsB.split(" ");
         String[] doublesplit = splitRespons[16].split(",");
         SessionID = doublesplit[0];
