@@ -112,21 +112,18 @@ public class SolveTask {
     }
 
     private void task5(JSONArray arguments){
-        /*JSONObject json = new JSONObject();
+        JSONObject json = new JSONObject();
         json.put("sessionId", currentSessionID);
 
         System.out.println(arguments);
         Object arg = arguments.get(0);
         System.out.println(arg);
 
-        String[] ipadresse = arg.toString().split(".");
-        //ipadresse[3].replace("0", "1");
+        String ipadresse = arg.toString().replace(".0", ".1");
 
-        String ip = ipadresse[0] + "." + ipadresse[1] + "." + ipadresse[2] + ".1";
-
-        json.put("result", ip);
+        json.put("ip", ipadresse);
         System.out.println(json);
-        sendPost("dkrest/solve", json);*/
+        sendPost("dkrest/solve", json);
     }
 
     private void taskFeedback() {
